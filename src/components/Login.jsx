@@ -6,6 +6,7 @@ import { setUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constant";
 import { motion } from "framer-motion";
+import AnimatedWrapper from "./AnimatedWrapper";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -43,7 +44,9 @@ const Login = () => {
   };
 
   return (
-    <div className="card bg-base-100 w-96 shadow-sm">
+    <AnimatedWrapper
+      className="card bg-base-100 w-96 shadow-sm"
+    >
       <div className="card-body">
         <h2 className="card-title">Login</h2>
         <form onSubmit={handleSubmit}>
@@ -94,7 +97,7 @@ const Login = () => {
           </div>
         </form>
       </div>
-    </div>
+    </AnimatedWrapper>
   );
 };
 
