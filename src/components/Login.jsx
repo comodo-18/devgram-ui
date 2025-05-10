@@ -1,12 +1,17 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setUser } from "./utils/userSlice";
+import { setUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "./utils/constant";
+import { BASE_URL } from "../utils/constant";
+import { motion } from "framer-motion";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [errorKey, setErrorKey] = useState(0); // State to trigger animation
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,20 +21,26 @@ const Login = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.post(BASE_URL + "login", {
-            email,
-            password
-          }, {withCredentials: true});   
-          console.log("Login successful:", res);
-          dispatch(setUser(res.data));
-          navigate("/feed");
+      const res = await axios.post(
+        BASE_URL + "login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
+      console.log("Login successful:", res);
+      dispatch(setUser(res.data));
+      navigate("/");
     } catch (error) {
-        console.error("Error logging in:", error);
+      setErrorKey((prev) => prev + 1); // Increment errorKey to trigger animation
+      setError(error?.response?.data);
+      console.error("Error logging in:", error);
     }
-  }
+  };
 
   return (
     <div className="card bg-base-100 w-96 shadow-sm">
@@ -60,6 +71,22 @@ const Login = () => {
               value={password}
             />
           </div>
+          {error && (
+            <motion.div
+              className="text-red-500 text-sm mb-2"
+              key={errorKey} // Re-trigger animation when error changes
+              initial={{ x: 0 }}
+              animate={{
+                x: [0, -10, 10, -10, 10, 0], // Shake effect
+              }}
+              transition={{
+                duration: 0.5, // Duration of the animation
+                ease: "easeInOut",
+              }}
+            >
+              {error}
+            </motion.div>
+          )}
           <div className="card-actions justify-end">
             <button type="submit" className="btn btn-warning">
               Login

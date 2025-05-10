@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { BASE_URL } from "./utils/constant";
+import { BASE_URL } from "../utils/constant";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { clearUser } from "./utils/userSlice";
+import { clearUser } from "../utils/userSlice";
+import Profile from "./Profile";
 const Navbar = () => {
   const user = useSelector((store) => store.user);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -29,7 +30,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Devgram</a>
+        <Link to = "/" className="btn btn-ghost text-xl">Devgram</Link>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
@@ -61,10 +62,10 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a className="justify-between">
+                <Link to="/profile" className="justify-between" onMouseDown={(e) => e.preventDefault()} onClick={toggleDropdown}>
                   Profile
                   <span className="badge">New</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a>Settings</a>
