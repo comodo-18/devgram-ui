@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -47,7 +47,7 @@ const Body = () => {
       transition={{ duration: 0.2, ease: "easeOut" }}
     >
       <Navbar />
-      <main className="flex-grow flex items-center justify-center">
+      <main className="flex-grow flex items-center justify-center my-2.5">
         <Outlet />
       </main>
       <Footer />

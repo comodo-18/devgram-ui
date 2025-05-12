@@ -1,9 +1,15 @@
-import React from 'react'
-
+import React from "react";
+import EditProfile from "./EditProfile";
+import Card from "./Card";
+import { useSelector } from "react-redux";
 const Profile = () => {
+  const userData = useSelector((store) => store.user);
   return (
-    <div>Profile</div>
-  )
-}
+    <div className="flex items-center justify-between mx-3 gap-x-6">
+      <EditProfile data={userData}/>
+      <Card data={userData} />
+    </div>
+  );
+};
 
-export default Profile
+export default Profile;

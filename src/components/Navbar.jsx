@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../utils/userSlice";
 import { motion } from "framer-motion";
+import { removeFeedItem } from "../utils/feedSlice";
 import Profile from "./Profile";
 const Navbar = () => {
   const user = useSelector((store) => store.user);
@@ -23,6 +24,7 @@ const Navbar = () => {
     try {
       await axios.post(BASE_URL + "logout", {}, { withCredentials: true });
       dispatch(clearUser());
+      dispatch(removeFeedItem());
       navigate("/login");
     } catch (error) {
       console.error("Error logging out:", error);
@@ -64,7 +66,7 @@ const Navbar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src={user.profilePicture}
                     className="dropdown dropdown-end"
                   />
                 </div>

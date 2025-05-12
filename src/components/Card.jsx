@@ -1,33 +1,83 @@
 import React, { useState } from "react";
 import AnimatedWrapper from "./AnimatedWrapper";
 
-const Card = () => {
+const Card = ({ data }) => {
+  console.log(data);
+  const {
+    firstName,
+    lastName,
+    gender,
+    age,
+    bio,
+    profilePicture,
+    location,
+    skills,
+  } = data;
   const [isImageLoaded, setIsImageLoaded] = useState(false); // Track image loading state
   return (
-    <AnimatedWrapper className="card bg-base-100 w-96 shadow-sm">
-      <figure className="px-10 pt-10">
-        {!isImageLoaded && (
-          <div className="w-full h-48 bg-gray-300 animate-pulse rounded-xl"></div>
-        )}
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-          alt="Shoes"
-          className="rounded-xl"
-          loading="lazy"
-          onLoad={() => {
-            console.log("Image loaded");
-            setIsImageLoaded(true);
-          }} // Set image loaded state to true
-        />
+    <AnimatedWrapper className="card bg-base-200 w-96 shadow-sm flex flex-col">
+      <figure className="relative flex-shrink-0 h-1/3 w-full">
+        <div className="relative h-full w-full">
+          {!isImageLoaded && <div className="skeleton h-full w-full"></div>}
+          <img
+            src={profilePicture}
+            alt="Profile picture"
+            className="rounded-t-xl h-full w-full object-cover"
+            loading="lazy"
+            onLoad={() => {
+              setIsImageLoaded(true);
+            }}
+          />
+          {/* Gradient overlay applied only to the image */}
+          <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-base-200 to-transparent pointer-events-none z-10"></div>
+        </div>
       </figure>
-      <div className="card-body items-center text-center">
-        <h2 className="card-title">Card Title</h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div className="card-actions">
-          <button className="btn btn-primary">Buy Now</button>
+      <div className="card-body flex-grow items-start text-left">
+        <div className="w-full text-left">
+          <h2 className="card-title">
+            {firstName + " " + lastName + ","}
+            <span className="font-normal">{age}</span>
+          </h2>
+        </div>
+        <p className="text-sm text-gray-500">{gender}</p>
+        <p className="text-sm text-gray-500">{location}</p>
+        <p className="text-sm text-gray-500">{skills.join(", ")}</p>
+        <p>{bio}</p>
+        <div className="card-actions flex justify-between w-full">
+          <button className="btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2.5"
+              stroke="currentColor"
+              className="size-[1.2em]"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+            Pass
+          </button>
+          <button className="btn">
+            Like
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2.5"
+              stroke="currentColor"
+              className="size-[1.2em]"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </AnimatedWrapper>
