@@ -26,7 +26,7 @@ const EditProfile = ({ data }) => {
 
   const handleSubmit = async (e) => {
     try {
-        let updateSkills = skills.split(",").map((skill) => skill.trim());
+        let updateSkills = typeof skills !== 'string'? skills : skills.split(",").map((skill) => skill.trim());
       const res = await axios.patch(
         BASE_URL + "profile/edit",
         {

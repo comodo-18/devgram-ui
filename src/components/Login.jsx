@@ -33,7 +33,6 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      console.log("Login successful:", res);
       dispatch(setUser(res.data));
       navigate("/");
     } catch (error) {
@@ -44,11 +43,10 @@ const Login = () => {
   };
 
   return (
-    <AnimatedWrapper
-      className="card bg-base-100 w-96 shadow-sm"
-    >
-      <div className="card-body">
-        <h2 className="card-title">Login</h2>
+  <div className="flex items-center justify-center">
+    <AnimatedWrapper className="card bg-base-100 w-96 shadow-sm">
+      <div className="card-body p-6">
+        <h2 className="card-title text-center">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-control mb-4">
             <label className="label">
@@ -77,13 +75,13 @@ const Login = () => {
           {error && (
             <motion.div
               className="text-red-500 text-sm mb-2"
-              key={errorKey} // Re-trigger animation when error changes
+              key={errorKey}
               initial={{ x: 0 }}
               animate={{
-                x: [0, -10, 10, -10, 10, 0], // Shake effect
+                x: [0, -10, 10, -10, 10, 0],
               }}
               transition={{
-                duration: 0.5, // Duration of the animation
+                duration: 0.5,
                 ease: "easeInOut",
               }}
             >
@@ -98,7 +96,8 @@ const Login = () => {
         </form>
       </div>
     </AnimatedWrapper>
-  );
+  </div>
+);
 };
 
 export default Login;

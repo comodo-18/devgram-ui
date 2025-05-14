@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -41,13 +40,13 @@ const Body = () => {
   }
   return (
     <AnimatedWrapper
-      className="flex flex-col min-h-screen items-center justify-center"
+      className="flex flex-col min-h-screen"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
     >
       <Navbar />
-      <main className="flex-grow flex items-center justify-center my-2.5">
+      <main className="flex-grow w-full flex justify-center items-center my-5">
         <Outlet />
       </main>
       <Footer />

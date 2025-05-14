@@ -19,7 +19,6 @@ const Navbar = () => {
     setIsDropdownOpen((prev) => !prev);
   };
   const handleLogout = async () => {
-    console.log("Logout clicked"); // Debugging log
     setIsDropdownOpen(false);
     try {
       await axios.post(BASE_URL + "logout", {}, { withCredentials: true });
@@ -30,7 +29,6 @@ const Navbar = () => {
       console.error("Error logging out:", error);
     }
   };
-  // console.log(user);
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
@@ -94,7 +92,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to='/connections' onMouseDown={(e)=>e.preventDefault()} onClick={toggleDropdown}>Connections</Link>
+              </li>
+              <li>
+                <Link to='/requests' onMouseDown={(e)=>e.preventDefault()} onClick={toggleDropdown}>Requests</Link>
               </li>
               <li>
                 <a

@@ -32,7 +32,7 @@ const Feed = () => {
   }, []);
   return (
     <>
-      {feedData && <Card data={feedData[1]}/>}
+      {feedData && <Card data={feedData[0]}/>}
     </>
   );
 };

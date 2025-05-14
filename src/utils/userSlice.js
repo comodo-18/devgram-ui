@@ -10,6 +10,10 @@ const userSlice = createSlice({
         clearUser: () => {
         return null;
         },
+        removeUser: (state, action) => {
+        let newState = state.filter((user) => user._id !== action.payload);
+        return newState;
+        }
     },
 })
 
