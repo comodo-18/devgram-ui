@@ -8,11 +8,11 @@ import { setUser } from "../utils/userSlice";
 const EditProfile = ({ data }) => {
   const [firstName, setFirstName] = useState(data.firstName); // State to track first name
   const [lastName, setLastName] = useState(data.lastName); // State to track last name
-  const [age, setAge] = useState(data.age); // State to track age
-  const [location, setLocation] = useState(data.location); // State to track location
-  const [profilePicture, setProfilePicture] = useState(data.profilePicture); // State to track profile picture URL
-  const [bio, setBio] = useState(data.bio); // State to track bio
-  const [skills, setSkills] = useState(data.skills); // State to track skills
+  const [age, setAge] = useState(data.age || ""); // State to track age
+  const [location, setLocation] = useState(data.location || ""); // State to track location
+  const [profilePicture, setProfilePicture] = useState(data.profilePicture || ""); // State to track profile picture URL
+  const [bio, setBio] = useState(data.bio || ""); // State to track bio
+  const [skills, setSkills] = useState(data.skills || ""); // State to track skills
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to toggle dropdown
   const [gender, setGender] = useState(data.gender); // State to track selected gender
   const genders = ["male", "female", "others"]; // Dropdown options
