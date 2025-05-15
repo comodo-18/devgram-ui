@@ -3,9 +3,9 @@ import AnimatedWrapper from "./AnimatedWrapper";
 import { BASE_URL } from "../utils/constant";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { removeUser } from "../utils/userSlice";
+import { removeUserFromFeed } from "../utils/feedSlice";
 
-const Card = ({ data }) => {
+const Card = ({ data, showButtons }) => {
   const {
     _id,
     firstName,
@@ -27,7 +27,7 @@ const Card = ({ data }) => {
         { withCredentials: true }
       );
 
-      dispatch(removeUser(id));
+      dispatch(removeUserFromFeed(id));
       console.log(data);
     } catch (error) {
       console.error("Error sending request:", error);
@@ -71,8 +71,8 @@ const Card = ({ data }) => {
           <p className="text-sm text-gray-500">{location}</p>
           <p className="text-sm text-gray-500">{skills.join(", ")}</p>
           <p>{bio}</p>
-          <div className="card-actions flex justify-between w-full">
-            <button className="btn" onClick={() => sendRequest("rejected", _id)}>
+          {showButtons && <div className="card-actions flex justify-between w-full">
+            <button className="btn" onClick={() => sendRequest("pass", _id)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -109,7 +109,7 @@ const Card = ({ data }) => {
                 />
               </svg>
             </button>
-          </div>
+          </div>}
         </div>
       </AnimatedWrapper>
     </div>

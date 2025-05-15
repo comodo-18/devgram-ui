@@ -7,7 +7,7 @@ const Profile = () => {
   return (
     <div className="flex items-center justify-between mx-3 gap-x-6">
       <EditProfile data={userData}/>
-      <Card data={userData} />
+      <Card data={userData} showButtons={false}/>
     </div>
   );
 };
