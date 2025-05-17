@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constant";
 import { motion } from "framer-motion";
 import AnimatedWrapper from "./AnimatedWrapper";
+import "primereact/resources/themes/saga-blue/theme.css"; // PrimeReact theme
+import "primereact/resources/primereact.min.css"; // PrimeReact core CSS
+import "primeicons/primeicons.css"; // PrimeIcons CSS
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +19,7 @@ const Login = () => {
   const [isLoginForm, setIsLoginForm] = useState(true); // State to toggle between login and signup forms
   const [error, setError] = useState(null);
   const [errorKey, setErrorKey] = useState(0); // State to trigger animation
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -90,7 +94,7 @@ const Login = () => {
                   <input
                     type="text"
                     placeholder="Enter your First Name"
-                    className="input input-bordered"
+                    className="input input-bordered w-full"
                     onChange={handFirstNameChange}
                     value={firstName}
                   />
@@ -102,7 +106,7 @@ const Login = () => {
                   <input
                     type="test"
                     placeholder="Enter your Last Name"
-                    className="input input-bordered"
+                    className="input input-bordered w-full"
                     onChange={handLastNameChange}
                     value={lastName}
                   />
@@ -116,7 +120,7 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="input input-bordered"
+                className="input input-bordered w-full"
                 onChange={handEmailChange}
                 value={email}
               />
@@ -125,13 +129,26 @@ const Login = () => {
               <label className="label">
                 <span className="label-text mb-1.5">Password</span>
               </label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="input input-bordered"
-                onChange={handlePasswordChange}
-                value={password}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"} // Toggle input type
+                  placeholder="Enter your password"
+                  className="input input-bordered w-full pr-12" // Add padding to match other fields and leave space for the icon
+                  onChange={handlePasswordChange}
+                  value={password}
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-3 flex items-center z-10" // Properly position the icon
+                  onClick={() => setShowPassword((prev) => !prev)} // Toggle visibility
+                >
+                  <i
+                    className={`pi ${
+                      showPassword ? "pi-eye-slash" : "pi-eye"
+                    } text-gray-500 cursor-pointer`}
+                  />
+                </button>
+              </div>
             </div>
             {error && (
               <motion.div
